@@ -24,6 +24,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$sqlInsertCustProfile = "INSERT INTO Customer (CustomerID, CustName) VALUES (NULL, '$custName')";
+if ($conn->query($sqlInsertCustProfile) === TRUE) {
+    echo "New Record Created Successully";
+    echo $sqlInsertCustProfile;
+} else {
+    echo "Error: " . $sqlInsertCustProfile . "<br>" . $conn->error;
+}
+
 ?>
 
 <!DOCTYPE html>
