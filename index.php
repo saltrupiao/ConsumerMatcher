@@ -8,8 +8,8 @@ echo '<!DOCTYPE html>
 	<title> Title </title>
 </head>
 
-	<body>
-
-</body>
+    <body>
+        <h1>Test</h1>
+    </body>
 </html>
 ';
