@@ -37,43 +37,13 @@ if ($conn->connect_error) {
 </head>
 
 <body>
-<form method="post" action="custprofilebuilder.php">
+<form method="post" action="matchResults.php">
     <h3>Create Customer Profile</h3>
     <p class="lead">Customer Name: <?php echo $custName ?></p>
     <p class="lead">Customer Name: <?php echo $custDomain ?></p>
     <div class="form-group">
         <label for="selectDomain">Select Matching Domain</label>
         <?php
-            /*
-            $sql = "SELECT FeatureID, DomainID, FeatureName FROM Feature";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    //echo '<select class="form-control" id="';
-                    echo "<select class='form-control' id='" . $row["FeatureName"] . "'>";
-                    //echo $row["FeatureName"];
-                    //echo '">';
-                    //$sql2 = mysqli_query($conn,'SELECT FeatureValue FROM FeatValue WHERE FeatureID = $row["FeatureID"]');
-                    $sql2 = 'SELECT FeatureValue FROM FeatValue WHERE DomainID = $row["DomainID"]';
-                    $result2 = $conn->query($sql2);
-                    echo $sql2;
-                    /*
-                    if ($result2->num_rows > 0) {
-                        while ($row2 = $result2->fetch_assoc()) {
-                            echo "<option>" . $row2["FeatureValue"] . "</option>";
-                        }
-                    }
-
-                    while ($row2 = $result2->fetch_array()) {
-                        echo "<option>" . $row2["FeatureValue"] . "</option>";
-                    }
-
-                    echo "</select>";
-
-                }
-            }
-            */
         $sqlFeature = "SELECT FeatureID, DomainID, FeatureName FROM Feature NATURAL JOIN Domain WHERE DomainName = '$custDomain'";
         echo "<h1>" . $sqlFeature . "</h1>";
         $qFeatureResult = $conn->query($sqlFeature);
@@ -81,8 +51,8 @@ if ($conn->connect_error) {
         if ($qFeatureResult->num_rows > 0) {
             $arrayFeatureNames = array();
             while ($qFeatureResultRow = $qFeatureResult->fetch_assoc()) {
-                echo "<select class='form-control' id='" . $qFeatureResultRow["FeatureName"] . "'>";
-
+                echo '<div class="row"><div class="col-md-6">';
+                echo "<select class='form-control' id='" . $qFeatureResultRow["FeatureName"] . "' name='" . $qFeatureResultRow["FeatureName"] . "'>";
                 $sqlFeatureValue = "SELECT * FROM Feature NATURAL JOIN Domain NATURAL JOIN FeatValue WHERE DomainName = '$custDomain' AND FeatureName = '{$qFeatureResultRow["FeatureName"]}'";
                 $qFeatureValueResult = $conn->query($sqlFeatureValue);
                 if ($qFeatureValueResult->num_rows > 0) {
@@ -90,28 +60,26 @@ if ($conn->connect_error) {
                         echo "<option>" . $qFeatureValueResultRow["FeatureValue"] . "</option>";
                     }
                 }
-                //array_push($arrayFeatureNames,$qFeatureResultRow["FeatureName"]);
-                //echo "<option>" . $qFeatureResultRow["FeatureValue"] . "</option>";
-                echo "</select>";
+                /*
+                echo "</select></div><div class='col-md-6'><div class='row'><div class='col-md-4'>";
+                echo "<input class='form-check-input' type='radio' name='" . $qFeatureResultRow["FeatureName"] . "PriorityH' value='" . $qFeatureResultRow["FeatureName"] . "PriorityH'>High</div>";
+                echo "<div class='col-md-4'><input class='form-check-input' type='radio' name='" . $qFeatureResultRow["FeatureName"] . "PriorityM'>Medium</div>";
+                echo "<div class='col-md-4'><input class='form-check-input' type='radio' name='" . $qFeatureResultRow["FeatureName"] . "PriorityM'>Low</div></div></div></div>";
+                */
+
+                echo "</select></div>";
+                echo "<div class='col-md-6'><select class='form-control' id='" . $qFeatureResultRow["FeatureName"] . "Priority' name='" . $qFeatureResultRow["FeatureName"] . "Priority'>";
+                echo "<option value='1'>High</option>";
+                echo "<option value='2'>Medium</option>";
+                echo "<option value='3'>Low</option>";
+                echo "</select></div></div>";
             }
         }
-
-        /*
-        while ($q1ResultRow = mysqli_fetch_array($q1Result)) {
-            echo "<select class='form-control' id='" . $q1ResultRow["FeatureName"] . "'>";
-
-            $sqlFeatValue = 'SELECT FeatureValue FROM Feature JOIN FeatValue WHERE DomainID = $q1ResultRow["DomainID"]';
-            $q2Result = mysqli_query($conn,$sqlFeatValue);
-
-            while ($q2ResultRow = mysqli_fetch_array($q2Result)) {
-                echo "<option>" . $q2ResultRow["FeatureValue"] . "</option>";
-            }
-
-        }
-        */
         ?>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <input class="btn btn-primary" type="submit" name="submitProfileBuilder">
 </form>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 </html>
