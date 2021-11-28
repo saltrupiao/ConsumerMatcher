@@ -171,11 +171,32 @@
                 echo "Error Deleting Record: " . $conn->error;
             }
 
-            $sqlInsertUpdatedCustomerMatch = "INSERT INTO CustMatch SELECT CustomerID, DomainID, StockNum, TotalPoints FROM StockMatch";
+            $sqlInsertUpdatedCustomerMatch = "INSERT INTO CustMatch SELECT CustomerID, DomainID, StockNum, StockDesc, TotalPoints FROM StockMatch";
             if ($conn->query($sqlInsertUpdatedCustomerMatch) === TRUE) {
                 echo "<h2> Insert Customer Match FINAL Query Success! </h2>";
             } else {
                 echo "Error Inserting into Customer Match Record: " . $conn->error;
+            }
+
+            $sqlDisplayMatchResults = "SELECT StockNum, StockDesc, TotalPoints FROM StockMatch";
+            $qDisplayMatchResults = $conn->query($sqlDisplayMatchResults);
+
+            if ($qDisplayMatchResults->num_rows > 0) {
+                echo "<table class='table table-striped'>";
+                echo "<thead><tr>";
+                echo "<th scope='col'>Stock Number</th>";
+                echo "<th scope='col'>Car</th>";
+                echo "<th scope='col'>Total Points</th>";
+                echo "</tr></thead>";
+                echo "<tbody>";
+                while ($qDisplayMatchResultsRow = $qDisplayMatchResults->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $qDisplayMatchResultsRow['StockNum'] . "</td>";
+                    echo "<td>" . $qDisplayMatchResultsRow['StockDesc'] . "</td>";
+                    echo "<td>" . $qDisplayMatchResultsRow['TotalPoints'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</tbody></table>";
             }
 
 
