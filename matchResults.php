@@ -158,11 +158,24 @@
 	                                from  StockPoints
                                     Group by StockNum
                                     order by TotalPoints DESC";
-
             if ($conn->query($sqlCreateStockMatch) === TRUE) {
                 echo "<h2> Create Stock Match Success! </h2>";
             } else {
                 echo "Error Creating Stock Match Record: " . $conn->error;
+            }
+
+            $sqlDeleteCustMatch = "DELETE FROM CustMatch WHERE DomainID = '$custDomainID' AND CustomerID = '$custID'";
+            if ($conn->query($sqlDeleteCustMatch) === TRUE) {
+                echo "<h2>CustMatch Deleted For Existing Customer Successfully</h2>";
+            } else {
+                echo "Error Deleting Record: " . $conn->error;
+            }
+
+            $sqlInsertUpdatedCustomerMatch = "INSERT INTO CustMatch SELECT CustomerID, DomainID, StockNum, TotalPoints FROM StockMatch";
+            if ($conn->query($sqlInsertUpdatedCustomerMatch) === TRUE) {
+                echo "<h2> Insert Customer Match FINAL Query Success! </h2>";
+            } else {
+                echo "Error Inserting into Customer Match Record: " . $conn->error;
             }
 
 
