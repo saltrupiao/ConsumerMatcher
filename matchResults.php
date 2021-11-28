@@ -146,7 +146,24 @@
                 echo "Error Creating Stock Points Record: " . $conn->error;
             }
 
-            //$sqlInsertCustMatch = "INSERT INTO CustProfile";
+            $sqlDropStockMatch = "DROP TABLE IF EXISTS StockMatch";
+            if ($conn->query($sqlDropStockMatch) === TRUE) {
+                echo "<h2>StockMatch Deleted Successfully</h2>";
+            } else {
+                echo "Error Deleting Record: " . $conn->error;
+            }
+
+            $sqlCreateStockMatch = "Create Table StockMatch
+                                    Select DomainID, CustomerID, StockNum, StockDesc, sum(WeightedAffinityPoints) as TotalPoints
+	                                from  StockPoints
+                                    Group by StockNum
+                                    order by TotalPoints DESC";
+
+            if ($conn->query($sqlCreateStockMatch) === TRUE) {
+                echo "<h2> Create Stock Match Success! </h2>";
+            } else {
+                echo "Error Creating Stock Match Record: " . $conn->error;
+            }
 
 
         } elseif ($custDomain == 'Homes') {
