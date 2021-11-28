@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
             <label for="selectDomain">Select Matching Domain</label>
             <select class="form-control" id="selectCustDomainIn" name="selectCustDomainIn">
                 <?php
-                    $sql = "SELECT DomainName from domain";
+                    $sql = "SELECT DomainName from DOMAIN";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {

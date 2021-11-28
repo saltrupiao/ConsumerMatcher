@@ -50,6 +50,7 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
     <p class="lead">Customer Name: <?php echo $custName ?></p>
     <p class="lead">Customer Domain: <?php echo $custDomain ?></p>
     <input type="hidden" id="custDomainH" name="custDomainH" value="<?php echo $custDomain ?>">
+    <input type="hidden" id="custNameH" name="custNameH" value="<?php echo $custName ?>"
     <div class="form-group">
         <label for="selectDomain">Select Matching Domain</label>
         <?php
@@ -61,6 +62,7 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
             $arrayFeatureNames = array();
             while ($qFeatureResultRow = $qFeatureResult->fetch_assoc()) {
                 echo '<div class="row"><div class="col-md-6">';
+                echo "<input type='hidden' id='" . $qFeatureResultRow["FeatureName"] . "ID' name='" . $qFeatureResultRow["FeatureName"] . "ID' value='" . $qFeatureResultRow["FeatureID"] . "'>";
                 echo "<select class='form-control' id='" . $qFeatureResultRow["FeatureName"] . "' name='" . $qFeatureResultRow["FeatureName"] . "'>";
                 $sqlFeatureValue = "SELECT * FROM Feature NATURAL JOIN Domain NATURAL JOIN FeatValue WHERE DomainName = '$custDomain' AND FeatureName = '{$qFeatureResultRow["FeatureName"]}'";
                 $qFeatureValueResult = $conn->query($sqlFeatureValue);
