@@ -37,7 +37,7 @@
         echo "<h1>Drive: $cpDrive</h1>";
         echo "<h1>Priority: $cpDrivePriority</h1><br>";
 
-        $custDomain = $_POST['selectCustDomainIn'];
+        $custDomain = $_POST['custDomainH'];
         echo "<h1>Customer Domain: ";
         echo $custDomain;
         echo "</h1>";

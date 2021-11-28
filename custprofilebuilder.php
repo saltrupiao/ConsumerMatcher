@@ -48,7 +48,8 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
 <form method="post" action="matchResults.php">
     <h3>Create Customer Profile</h3>
     <p class="lead">Customer Name: <?php echo $custName ?></p>
-    <p class="lead">Customer Name: <?php echo $custDomain ?></p>
+    <p class="lead">Customer Domain: <?php echo $custDomain ?></p>
+    <input type="hidden" id="custDomainH" name="custDomainH" value="<?php $custDomain ?>">
     <div class="form-group">
         <label for="selectDomain">Select Matching Domain</label>
         <?php
