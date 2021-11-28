@@ -7,8 +7,8 @@
     $dbname = "csiproject";
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $cpBodyStyle = $_POST['Body+Style'];
-        $cpBodyStylePriority = $_POST['Body+StylePriority'];
+        $cpBodyStyle = $_POST['BodyStyle'];
+        $cpBodyStylePriority = $_POST['BodyStylePriority'];
 
         $cpColor = $_POST['Color'];
         $cpColorPriority = $_POST['ColorPriority'];
