@@ -28,24 +28,19 @@
         <div class="row align-items-md-stretch">
             <div class="col-md-6">
                 <div class="h-100 p-5 text-white bg-dark rounded-3">
-                    <h2>Admin Interface</h2>
-                    <p>Use the following credentials to access the Admin/HR Interface:</p>
-                    <ul>
-                        <li>Username: <i>root</i></li>
-                        <li>Password: <i>oakland</i></li>
-                    </ul>
-                    <a href="" class="btn btn-outline-light" role="button" target="_blank">Go To Admin Interface</a>
+                    <h2>Database File</h2>
+                    <p>To see this project for yourself, please clone our Git Repo, import the SQL File into PHPMyAdmin, and use the following credentials for access:</p>
+                    <a href="csiproject.sql" class="btn btn-outline-light" role="button" target="_blank">Download SQL File</a>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="h-100 p-5 text-white bg-dark rounded-3">
-                    <h2>Employee Interface</h2>
-                    <p>Use the following credentials to access the Admin/HR Interface:</p>
+                    <h2>Database Credentials</h2>
+                    <p>Use the following credentials to access the database from the PHP Interface:</p>
                     <ul>
-                        <li>Username: <i>jdoe</i></li>
-                        <li>Password: <i>Oakland2</i></li>
+                        <li>Username: <i>root</i></li>
+                        <li>Password: <i>oakland</i></li>
                     </ul>
-                    <a href="emp.php" class="btn btn-outline-light" role="button" target="_blank">Go To Employee Interface</a>
                 </div>
             </div>
         </div>
