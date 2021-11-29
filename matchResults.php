@@ -251,39 +251,32 @@
             $cpLotType = $_POST['LotType'];
             $cpLotTypePriority = $_POST["LotTypePriority"];
 
-            $sqlInsertCustProfileBody = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpBodyStyleID, NULL, '$cpBodyStyle', $cpBodyStylePriority)";
-            if ($conn->query($sqlInsertCustProfileBody) === TRUE) {
+            $sqlInsertCustProfileStyle = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpHomeStyleID, NULL, '$cpHomeStyle', $cpHomeStylePriority)";
+            if ($conn->query($sqlInsertCustProfileStyle) === TRUE) {
                 //echo "Body Insert Successful";
             } else {
-                echo "error: " . $sqlInsertCustProfileBody . "<br>" . $conn->error;
+                echo "error: " . $sqlInsertCustProfileStyle . "<br>" . $conn->error;
             }
 
-            $sqlInsertCustProfileColor = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpColorID, NULL, '$cpColor', $cpColorPriority)";
-            if ($conn->query($sqlInsertCustProfileColor) === TRUE) {
+            $sqlInsertCustProfileNumBedrooms = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpNumBedroomsID, NULL, '$cpNumBedrooms', $cpNumBedroomsPriority)";
+            if ($conn->query($sqlInsertCustProfileNumBedrooms) === TRUE) {
                 //echo "Color Insert Successful";
             } else {
-                echo "error: " . $sqlInsertCustProfileColor . "<br>" . $conn->error;
+                echo "error: " . $sqlInsertCustProfileNumBedrooms . "<br>" . $conn->error;
             }
 
-            $sqlInsertCustProfileEngine = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpEngineID, NULL, '$cpEngine', $cpEnginePriority)";
-            if ($conn->query($sqlInsertCustProfileEngine) === TRUE) {
+            $sqlInsertCustProfileSchoolSys = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpSchoolSystemID, NULL, '$cpSchoolSystem', $cpSchoolSystemPriority)";
+            if ($conn->query($sqlInsertCustProfileSchoolSys) === TRUE) {
                 //echo "Engine Insert Successful";
             } else {
-                echo "error: " . $sqlInsertCustProfileEngine . "<br>" . $conn->error;
+                echo "error: " . $sqlInsertCustProfileSchoolSys . "<br>" . $conn->error;
             }
 
-            $sqlInsertCustProfileTrans = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpTransmissionID, NULL, '$cpTransmission', $cpTransmissionPriority)";
-            if ($conn->query($sqlInsertCustProfileTrans) === TRUE) {
+            $sqlInsertCustProfileLotType = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpLotTypeID, NULL, '$cpLotType', $cpLotTypePriority)";
+            if ($conn->query($sqlInsertCustProfileLotType) === TRUE) {
                 //echo "Trans Insert Successful";
             } else {
-                echo "error: " . $sqlInsertCustProfileTrans . "<br>" . $conn->error;
-            }
-
-            $sqlInsertCustProfileDrive = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpDriveID, NULL, '$cpDrive', $cpDrivePriority)";
-            if ($conn->query($sqlInsertCustProfileDrive) === TRUE) {
-                //echo "Trans Insert Successful";
-            } else {
-                echo "error: " . $sqlInsertCustProfileDrive . "<br>" . $conn->error;
+                echo "error: " . $sqlInsertCustProfileLotType . "<br>" . $conn->error;
             }
 
 
