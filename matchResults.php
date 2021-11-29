@@ -214,7 +214,7 @@
             $qDisplayMatchResults = $conn->query($sqlDisplayMatchResults);
 
             if ($qDisplayMatchResults->num_rows > 0) {
-                echo "<h2>Your Results are In!</h2>";
+                echo "<h2>" . $custName . ", Your Results Are In!</h2>";
                 echo "<table class='table table-striped'>";
                 echo "<thead><tr>";
                 echo "<th scope='col'>Stock Number</th>";
