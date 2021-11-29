@@ -70,6 +70,7 @@
         echo "</h1>";
        */
 
+        // ******************************* VEHICLES *******************************
         if ($custDomain == 'Vehicles') {
 
             //Get Selected FeatureID
@@ -232,32 +233,137 @@
                 echo "</tbody></table>";
             }
 
-
+        // ******************************* HOMES *******************************
         } elseif ($custDomain == 'Homes') {
+            $cpHomeStyleID = $_POST['HomeStyleID'];
             $cpHomeStyle = $_POST['HomeStyle'];
             $cpHomeStylePriority = $_POST['HomeStylePriority'];
 
+            $cpNumBedroomsID = $_POST['NumBedroomsID'];
             $cpNumBedrooms = $_POST['NumBedrooms'];
             $cpNumBedroomsPriority = $_POST['NumBedroomsPriority'];
 
+            $cpSchoolSystemID = $_POST['SchoolSystemID'];
             $cpSchoolSystem = $_POST['SchoolSystem'];
             $cpSchoolSystemPriority = $_POST['SchoolSystemPriority'];
 
+            $cpLotTypeID = $_POST['LotTypeID'];
             $cpLotType = $_POST['LotType'];
             $cpLotTypePriority = $_POST["LotTypePriority"];
 
-            echo "<h1>Home Style: $cpHomeStyle</h1>";
-            echo "<h1>Priority: $cpHomeStylePriority</h1><br>";
+            $sqlInsertCustProfileBody = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpBodyStyleID, NULL, '$cpBodyStyle', $cpBodyStylePriority)";
+            if ($conn->query($sqlInsertCustProfileBody) === TRUE) {
+                //echo "Body Insert Successful";
+            } else {
+                echo "error: " . $sqlInsertCustProfileBody . "<br>" . $conn->error;
+            }
 
-            echo "<h1>Number of Bedrooms: $cpNumBedrooms</h1>";
-            echo "<h1>Priority: $cpNumBedroomsPriority</h1><br>";
+            $sqlInsertCustProfileColor = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpColorID, NULL, '$cpColor', $cpColorPriority)";
+            if ($conn->query($sqlInsertCustProfileColor) === TRUE) {
+                //echo "Color Insert Successful";
+            } else {
+                echo "error: " . $sqlInsertCustProfileColor . "<br>" . $conn->error;
+            }
 
-            echo "<h1>School System: $cpSchoolSystem </h1>";
-            echo "<h1>Priority: $cpSchoolSystemPriority</h1><br>";
+            $sqlInsertCustProfileEngine = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpEngineID, NULL, '$cpEngine', $cpEnginePriority)";
+            if ($conn->query($sqlInsertCustProfileEngine) === TRUE) {
+                //echo "Engine Insert Successful";
+            } else {
+                echo "error: " . $sqlInsertCustProfileEngine . "<br>" . $conn->error;
+            }
 
-            echo "<h1>Lot Type: $cpLotType </h1>";
-            echo "<h1>Priority: $cpLotTypePriority</h1><br>";
+            $sqlInsertCustProfileTrans = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpTransmissionID, NULL, '$cpTransmission', $cpTransmissionPriority)";
+            if ($conn->query($sqlInsertCustProfileTrans) === TRUE) {
+                //echo "Trans Insert Successful";
+            } else {
+                echo "error: " . $sqlInsertCustProfileTrans . "<br>" . $conn->error;
+            }
 
+            $sqlInsertCustProfileDrive = "INSERT INTO CustProfile (CustomerID, DomainID, FeatureID, DesiredFeatureValue, DesiredFeatureValueName, Multiplier) VALUES ($custID, $custDomainID, $cpDriveID, NULL, '$cpDrive', $cpDrivePriority)";
+            if ($conn->query($sqlInsertCustProfileDrive) === TRUE) {
+                //echo "Trans Insert Successful";
+            } else {
+                echo "error: " . $sqlInsertCustProfileDrive . "<br>" . $conn->error;
+            }
+
+
+            //Drop StockPoints Table -- Reference: https://www.w3schools.com/php/php_mysql_delete.asp
+            $sqlDropStockPoints = "DROP TABLE IF EXISTS StockPoints";
+            if ($conn->query($sqlDropStockPoints) === TRUE) {
+                //echo "<h2>StockPoints Deleted Successfully</h2>";
+            } else {
+                echo "Error Deleting Record: " . $conn->error;
+            }
+
+            $sqlCreateStockPoints = "Create Table StockPoints
+	                                    (Select S.DomainID, C.CustomerID, S.StockNum, S.StockDesc, 
+	                                    S.FeatureID, S.StockFeatureValue, S.FeatureName, S.DisplayOrder, S.FeatureValue,
+	                                    S.CustSelectedValue, S.StockConfigValue, S.AffinityPoints, DesiredFeatureValue, Multiplier, (AffinityPoints * Multiplier) as WeightedAffinityPoints
+                                        from StockAffinity S join CustProfile C 
+                                        on S.CustSelectedValue = C.DesiredFeatureValue and
+                                        S.DomainID = '$custDomainID' and CustomerID = '$custID') order by stocknum, featureID";
+
+            if ($conn->query($sqlCreateStockPoints) === TRUE) {
+                //echo "<h2> Create Stock Points Success! </h2>";
+            } else {
+                echo "Error Creating Stock Points Record: " . $conn->error;
+            }
+
+            $sqlDropStockMatch = "DROP TABLE IF EXISTS StockMatch";
+            if ($conn->query($sqlDropStockMatch) === TRUE) {
+                //echo "<h2>StockMatch Deleted Successfully</h2>";
+            } else {
+                echo "Error Deleting Record: " . $conn->error;
+            }
+
+            $sqlCreateStockMatch = "Create Table StockMatch
+                                    Select DomainID, CustomerID, StockNum, StockDesc, sum(WeightedAffinityPoints) as TotalPoints
+	                                from  StockPoints
+                                    Group by StockNum
+                                    order by TotalPoints DESC";
+            if ($conn->query($sqlCreateStockMatch) === TRUE) {
+                //echo "<h2> Create Stock Match Success! </h2>";
+            } else {
+                echo "Error Creating Stock Match Record: " . $conn->error;
+            }
+
+            $sqlDeleteCustMatch = "DELETE FROM CustMatch WHERE DomainID = '$custDomainID' AND CustomerID = '$custID'";
+            if ($conn->query($sqlDeleteCustMatch) === TRUE) {
+                //echo "<h2>CustMatch Deleted For Existing Customer Successfully</h2>";
+            } else {
+                echo "Error Deleting Record: " . $conn->error;
+            }
+
+            $sqlInsertUpdatedCustomerMatch = "INSERT INTO CustMatch SELECT CustomerID, DomainID, StockNum, StockDesc, TotalPoints FROM StockMatch";
+            if ($conn->query($sqlInsertUpdatedCustomerMatch) === TRUE) {
+                //echo "<h2> Insert Customer Match FINAL Query Success! </h2>";
+            } else {
+                echo "Error Inserting into Customer Match Record: " . $conn->error;
+            }
+
+            $sqlDisplayMatchResults = "SELECT StockNum, StockDesc, TotalPoints FROM StockMatch";
+            $qDisplayMatchResults = $conn->query($sqlDisplayMatchResults);
+
+            if ($qDisplayMatchResults->num_rows > 0) {
+                echo "<h2>" . $custName . ", Your Results Are In!</h2>";
+                echo "<table class='table table-striped'>";
+                echo "<thead><tr>";
+                echo "<th scope='col'>Stock Number</th>";
+                echo "<th scope='col'>Car</th>";
+                echo "<th scope='col'>Total Points</th>";
+                echo "</tr></thead>";
+                echo "<tbody>";
+                while ($qDisplayMatchResultsRow = $qDisplayMatchResults->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $qDisplayMatchResultsRow['StockNum'] . "</td>";
+                    echo "<td>" . $qDisplayMatchResultsRow['StockDesc'] . "</td>";
+                    echo "<td>" . $qDisplayMatchResultsRow['TotalPoints'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</tbody></table>";
+            }
+
+         // ******************************* MATES *******************************
         } elseif ($custDomain == 'Mates') {
             $cpAge = $_POST['Age'];
             $cpAgePriority = $_POST['AgePriority'];
