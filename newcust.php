@@ -13,19 +13,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, firstname, lastname FROM MyGuests";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-    }
-} else {
-    echo "0 results";
-}
-//$conn->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +25,19 @@ if ($result->num_rows > 0) {
 </head>
 
     <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.php">Consumer Matching Engine</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="newcust.php">Enter CME</a>
+                <a class="nav-link" href="about.html">About CME</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
         <form method="post" action="custprofilebuilder.php">
         <h3>Create Customer Profile</h3>
           <div class="form-group">
@@ -66,5 +66,6 @@ if ($result->num_rows > 0) {
 
           <input class="btn btn-primary" type="submit" name="submit">
         </form>
+    </div>
     </body>
 </html>
