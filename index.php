@@ -20,7 +20,7 @@
                 <br><br><p>To enter the Consumer Matching Engine, please click on the Green Button below:</p>
                 <div class="container-fluid py-5">
                     <div class="row d-flex justify-content-center text-center">
-                        <button type="button" class="btn btn-success btn-lg">Start the Consumer Matching Engine</button>
+                        <a href="newcust.php" class="btn btn-success btn-lg" role="button" target="_blank">Start the Consumer Matching Engine</a>
                     </div>
                 </div>
             </div>
