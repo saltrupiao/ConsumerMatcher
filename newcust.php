@@ -33,7 +33,7 @@ if ($conn->connect_error) {
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" href="newcust.php">Enter CME</a>
-                <a class="nav-link" href="about.html">About CME</a>
+                <a class="nav-link" href="index.php">About CME</a>
             </div>
         </div>
     </nav>

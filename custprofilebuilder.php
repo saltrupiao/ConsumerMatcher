@@ -38,7 +38,7 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
 <!DOCTYPE html>
 <html lang="en">
     <meta charset="UTF-8">
-    <title>Page Title</title>
+    <title>Profile Builder</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <body>
@@ -50,7 +50,7 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" href="newcust.php">Enter CME</a>
-                <a class="nav-link" href="about.html">About CME</a>
+                <a class="nav-link" href="index.php">About CME</a>
             </div>
         </div>
     </nav>
