@@ -100,8 +100,8 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
                     }
                 }
                 ?>
+                <input class="btn btn-primary" type="submit" name="submitProfileBuilder">
             </div>
-            <input class="btn btn-primary" type="submit" name="submitProfileBuilder">
         </form>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
