@@ -30,7 +30,7 @@
                 <div class="h-100 p-5 text-white bg-dark rounded-3">
                     <h2>Database File</h2>
                     <p>To see this project for yourself, please clone our Git Repo, import the SQL File into PHPMyAdmin, and use the following credentials for access:</p>
-                    <a href="csiproject.sql" class="btn btn-outline-light" role="button" target="_blank">Download SQL File</a>
+                    <a href="CME_DB_20211129.sql" class="btn btn-outline-light" role="button" target="_blank">Download SQL File</a>
                 </div>
             </div>
             <div class="col-md-6">
