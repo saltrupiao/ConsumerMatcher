@@ -231,6 +231,13 @@
                     echo "</tr>";
                 }
                 echo "</tbody></table>";
+                echo "<br><br><br><br><div class='card'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>Thank you for using the Consumer Matching Engine!</h5>
+                            <p class='card-text'>To reset the CME and perform another match calculation please click the button below:</p>
+                            <a href='newcust.php' class='btn btn-primary'>Restart the CME</a>
+                        </div>
+                        </div>";
             }
 
         // ******************************* HOMES *******************************
@@ -354,6 +361,13 @@
                     echo "</tr>";
                 }
                 echo "</tbody></table>";
+                echo "<br><br><br><br><div class='card'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>Thank you for using the Consumer Matching Engine!</h5>
+                            <p class='card-text'>To reset the CME and perform another match calculation please click the button below:</p>
+                            <a href='newcust.php' class='btn btn-primary'>Restart the CME</a>
+                        </div>
+                        </div>";
             }
 
          // ******************************* MATES *******************************
