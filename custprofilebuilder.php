@@ -69,6 +69,7 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
                 $qFeatureResult = $conn->query($sqlFeature);
 
                 if ($qFeatureResult->num_rows > 0) {
+                    //reference: https://www.w3schools.com/php/func_array_push.asp
                     $arrayFeatureNames = array();
                     while ($qFeatureResultRow = $qFeatureResult->fetch_assoc()) {
                         echo '<div class="row">';
