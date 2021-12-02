@@ -94,9 +94,9 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
 
                         echo "</select></div>";
                         echo "<div class='col-md-3'><select class='form-control' id='" . $qFeatureResultRow["FeatureName"] . "Priority' name='" . $qFeatureResultRow["FeatureName"] . "Priority'>";
-                        echo "<option value='1'>High</option>";
+                        echo "<option value='3'>High</option>";
                         echo "<option value='2'>Medium</option>";
-                        echo "<option value='3'>Low</option>";
+                        echo "<option value='1'>Low</option>";
                         echo "</select></div></div>";
                     }
                 }
