@@ -10,9 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $custName = $_POST['custNameIn'];
 
     $custDomain = $_POST['selectCustDomainIn'];
-    //echo "<h1>Customer Domain: ";
-    //echo $custDomain;
-    //echo "</h1>";
+
 }
 else {
     echo 'No data found or errors';
@@ -85,12 +83,6 @@ if ($conn->query($sqlInsertCustProfile) === TRUE) {
                                 echo "<option>" . $qFeatureValueResultRow["FeatureValue"] . "</option>";
                             }
                         }
-                        /*
-                        echo "</select></div><div class='col-md-6'><div class='row'><div class='col-md-4'>";
-                        echo "<input class='form-check-input' type='radio' name='" . $qFeatureResultRow["FeatureName"] . "PriorityH' value='" . $qFeatureResultRow["FeatureName"] . "PriorityH'>High</div>";
-                        echo "<div class='col-md-4'><input class='form-check-input' type='radio' name='" . $qFeatureResultRow["FeatureName"] . "PriorityM'>Medium</div>";
-                        echo "<div class='col-md-4'><input class='form-check-input' type='radio' name='" . $qFeatureResultRow["FeatureName"] . "PriorityM'>Low</div></div></div></div>";
-                        */
 
                         echo "</select></div>";
                         echo "<div class='col-md-3'><select class='form-control' id='" . $qFeatureResultRow["FeatureName"] . "Priority' name='" . $qFeatureResultRow["FeatureName"] . "Priority'>";
